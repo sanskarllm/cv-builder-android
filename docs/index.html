@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CVCraft – Free CV / Resume Builder for Android</title>
+  <meta name="description" content="Create beautiful professional resumes on Android. Free, offline, 3 templates, export to PDF." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid #1e293b;
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo span { color: var(--primary); }
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, #93c5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(37, 99, 235, 0.15);
+      color: #60a5fa;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(37, 99, 235, 0.3);
+    }
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+    }
+    .btn-secondary {
+      background: var(--card);
+      color: white;
+      border: 1px solid #334155;
+    }
+    .btn-secondary:hover {
+      background: #334155;
+      border-color: #475569;
+    }
+    .note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      padding: 40px 0 80px;
+    }
+    .feature {
+      background: var(--card);
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+    .feature:hover { border-color: var(--primary); }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(37, 99, 235, 0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+    .feature h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+    .feature p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .howto {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 80px;
+      border: 1px solid #334155;
+    }
+    .howto h2 {
+      font-size: 1.6rem;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .steps {
+      display: grid;
+      gap: 20px;
+    }
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step strong { display: block; margin-bottom: 4px; }
+    .step span { color: var(--muted); font-size: 0.95rem; }
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      border-top: 1px solid #1e293b;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    footer a { color: #60a5fa; text-decoration: none; }
+    code {
+      background: #0f172a;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="#" class="logo">CV<span>Craft</span></a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="badge">Free • Offline • Open Source</div>
+      <h1>Create professional resumes<br>in minutes</h1>
+      <p>
+        Beautiful CV builder for Android. Choose templates, fill your details,
+        and export a clean PDF — no account, no ads, fully offline.
+      </p>
+
+      <div class="cta-group">
+        <a href="cvcraft-source.zip" class="btn btn-primary" download>
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+          </svg>
+          Download Source Code
+        </a>
+        <a href="https://github.com/sanskarllm/cv-builder-android" class="btn btn-secondary" target="_blank" rel="noopener">
+          View on GitHub
+        </a>
+      </div>
+      <p class="note">
+        Source code ZIP • Build the APK yourself in 2 minutes with Flutter
+      </p>
+    </section>
+
+    <section class="features">
+      <div class="feature">
+        <div class="feature-icon">📄</div>
+        <h3>3 Professional Templates</h3>
+        <p>Modern, Classic & Minimal designs. Switch anytime and preview instantly.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📱</div>
+        <h3>Android First</h3>
+        <p>Built with Flutter. Runs smoothly on any Android phone. Also works on iOS & Web.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔒</div>
+        <h3>100% Offline & Private</h3>
+        <p>All data stays on your device. No login, no tracking, no cloud required.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🖨️</div>
+        <h3>Export to PDF</h3>
+        <p>One tap to generate and share a clean, ATS-friendly PDF resume.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">✏️</div>
+        <h3>Easy Editor</h3>
+        <p>Tabbed interface for Personal info, Experience, Education, Skills & Projects.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🌙</div>
+        <h3>Dark Mode</h3>
+        <p>Beautiful Material 3 design that automatically follows your system theme.</p>
+      </div>
+    </section>
+
+    <section class="howto">
+      <h2>How to get the APK (2 minutes)</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <strong>Download the source</strong>
+            <span>Click the blue “Download Source Code” button above. You get a ZIP file.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <strong>Install Flutter</strong>
+            <span>If you don’t have it: <a href="https://docs.flutter.dev/get-started/install" target="_blank" style="color:#60a5fa">docs.flutter.dev</a> (one-time setup)</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <strong>Build the APK</strong>
+            <span>
+              Unzip → open terminal in the folder → run:<br>
+              <code>flutter pub get</code> then <code>flutter build apk --release</code>
+            </span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div>
+            <strong>Install on phone</strong>
+            <span>The APK is at <code>build/app/outputs/flutter-apk/app-release.apk</code>. Transfer & install.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Made with ❤️ • Open source • Free forever</p>
+      <p style="margin-top:8px">
+        <a href="https://github.com/sanskarllm/cv-builder-android">GitHub</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
